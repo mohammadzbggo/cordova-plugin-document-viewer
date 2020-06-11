@@ -217,6 +217,7 @@
 				NSInteger pageCount = CGPDFDocumentGetNumberOfPages(thePDFDocRef);
 
 				_pageCount = [NSNumber numberWithInteger:pageCount];
+				NSLog(@"[doc is openable]@ pages count:%d", _pageCount);
 
 				//CGPDFDocumentRelease(thePDFDocRef),thePDFDocRef = NULL; // Cleanup
 			}

@@ -120,6 +120,7 @@
 
     // URL
     NSString* url = [options objectForKey:@"url"];
+    NSLog(@"[pdfviewer] pre open the doc.");
     if (url != nil && url.length > 0) {
 #ifdef __CORDOVA_4_0_0
 	NSURL* baseUrl = [self.webViewEngine URL];
@@ -147,6 +148,8 @@
                 }
                 
                 readerViewController = [[SDVReaderViewController alloc] initWithReaderDocument:document options:viewerOptions linkHandler:^(NSString *link, void (^nativeLinkHandler)(void)) {
+                    // testing
+                    NSLog(@"opening doc");
                     BOOL handled = NO;
                     for (SDVLinkHandlerInfo *handler in linkHandlers) {
                         NSRange matchedRange = [handler.regex rangeOfFirstMatchInString:link options:0 range:NSMakeRange(0, link.length)];
