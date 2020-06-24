@@ -128,9 +128,11 @@
 	NSURL* baseUrl = [self.webView.request URL];
 #endif
         NSURL* absoluteURL = [[NSURL URLWithString:url relativeToURL:baseUrl] absoluteURL];
+        NSNumber* fileSize = nil;
 
         if ([[NSFileManager defaultManager] fileExistsAtPath:absoluteURL.path]) {
-            NSLog(@"[pdfviewer] path: %@", absoluteURL.path);
+            [absoluteURL:&fileSize forKey:NSURLFileSizeKey];
+            NSLog(@"[pdfviewer] path: %@, size: %@", absoluteURL.path, fileSize);
 
             ReaderDocument *document = [ReaderDocument withDocumentFilePath:absoluteURL.path password:nil];
 
