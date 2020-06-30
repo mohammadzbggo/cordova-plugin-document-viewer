@@ -211,7 +211,7 @@
 			CFURLRef docURLRef = (__bridge CFURLRef)[self fileURL]; // CFURLRef from NSURL
 
 			CGPDFDocumentRef thePDFDocRef = [self pdfDocumentRef];
-
+			NSLog(@"[doc page for view] %@", thePDFDocRef);
 			if (thePDFDocRef != NULL) // Get the total number of pages in the document
 			{
 				NSInteger pageCount = CGPDFDocumentGetNumberOfPages(thePDFDocRef);
@@ -223,7 +223,9 @@
 			}
 			else // Cupertino, we have a problem with the document
 			{
-				NSAssert(NO, @"CGPDFDocumentRef == NULL");
+				NSLog(NO, @"CGPDFDocumentRef == NULL");
+				self = nil;
+				return self;
 			}
 
 			_lastOpen = [NSDate dateWithTimeIntervalSinceReferenceDate:0.0];
@@ -280,6 +282,7 @@
 {
 	if (_pdfDocumentRef == nil){
         CFURLRef docURLRef = (__bridge CFURLRef)[self fileURL]; // CFURLRef from NSURL
+		NSLog(@"[the-viewer-internals]@ pages url:@", "test");
         _pdfDocumentRef = CGPDFDocumentCreateUsingUrl(docURLRef, _password);
 	}
 	return _pdfDocumentRef;
